@@ -1,0 +1,37 @@
+{
+    "name": "@cobo/agentic-wallet",
+    "version": "0.1.2",
+    "description": "Unified wallet engine for human and agent principals",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepare": "npm run build",
+        "test": "jest"
+    },
+    "dependencies": {
+        "axios": "^1.7.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.4.0",
+        "@types/node": "^20.0.0",
+        "jest": "^30.0.0",
+        "ts-jest": "^29.4.0",
+        "@types/jest": "^30.0.0"
+    },
+    "keywords": [
+        "openapi",
+        "cobo",
+        "agentic",
+        "wallet",
+        "sdk"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CoboGlobal/cobo-agentic-wallet-ts-sdk.git"
+    }
+}
