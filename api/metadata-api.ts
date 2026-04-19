@@ -14,7 +14,11 @@ import globalAxios from 'axios';
 import { Configuration, getServerUrl } from '../configuration';
 import { assertParamExists } from '../common';
 // @ts-ignore
+import type { EthCallRequest } from '../models';
+// @ts-ignore
 import type { StandardResponseChainInfo } from '../models';
+// @ts-ignore
+import type { StandardResponseEthCallResult } from '../models';
 // @ts-ignore
 import type { StandardResponseListTokenCandidate } from '../models';
 // @ts-ignore
@@ -46,6 +50,51 @@ export class MetadataApi {
             headers['X-API-Key'] = this.configuration.apiKey;
         }
         return headers;
+    }
+
+    /**
+     * Call a view/pure function on an EVM contract
+     * Proxies an `eth_call` JSON-RPC request to the configured EVM node for the given chain. Suitable for calling view or pure contract functions without creating a transaction. Returns the raw hex result.
+     * @param EthCallRequest 
+     * @param X_API_Key 
+     * @param options Override http request option.
+     */
+    public async ethCall(EthCallRequest: EthCallRequest, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseEthCallResult>> {
+        let localVarPath = '/api/v1/metadata/eth-call';
+        const localVarUrlObj = new URL(localVarPath, this.basePath);
+        const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...options };
+        const localVarHeaderParameter: Record<string, string> = { ...this.getHeaders() };
+        const localVarQueryParameter: Record<string, any> = {};
+
+        // verify required parameter 'EthCallRequest' is not null or undefined
+        assertParamExists('ethCall', 'EthCallRequest', EthCallRequest);
+
+        if (X_API_Key !== undefined && X_API_Key !== null) {
+            localVarHeaderParameter['X-API-Key'] = String(X_API_Key);
+        }
+
+        localVarHeaderParameter['Content-Type'] = 'application/json';
+        localVarHeaderParameter['Accept'] = 'application/json';
+
+        const queryString = new URLSearchParams(
+            Object.entries(localVarQueryParameter).reduce((acc, [key, value]) => {
+                if (Array.isArray(value)) {
+                    value.forEach(v => acc.push([key, String(v)]));
+                } else {
+                    acc.push([key, String(value)]);
+                }
+                return acc;
+            }, [] as [string, string][])
+        ).toString();
+        if (queryString) {
+            localVarUrlObj.search = queryString;
+        }
+
+        localVarRequestOptions.headers = { ...localVarHeaderParameter, ...options?.headers };
+        localVarRequestOptions.data = EthCallRequest;
+        localVarRequestOptions.url = localVarUrlObj.toString();
+
+        return this.axios.request(localVarRequestOptions);
     }
 
     /**

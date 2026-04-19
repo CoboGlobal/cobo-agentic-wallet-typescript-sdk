@@ -13,7 +13,7 @@
 
 
 // @ts-ignore
-import type { Fee } from './fee';
+import type { FeeRequest } from './fee-request';
 
 // @ts-ignore
 import type { SolAddressLookupTableAccount } from './sol-address-lookup-table-account';
@@ -73,11 +73,11 @@ export interface ContractCallCreate {
      */
     'request_id'?: string;
     /**
-     * Optional custom fee parameters. If omitted, the network default is used.
-     * @type {Fee}
+     * 
+     * @type {FeeRequest}
      * @memberof ContractCallCreate
      */
-    'fee'?: Fee;
+    'fee'?: FeeRequest | null;
     /**
      * The source address to call from. If omitted, the server auto-selects the wallet address on this chain with the highest available native token balance for this chain (explicit `src_addr` always takes precedence).
      * @type {string}

@@ -64,7 +64,7 @@ export class PactsApi {
 
     /**
      * Get pact detail
-     * Retrieve pact details. The api_key field is only visible to the operator that submitted the pact.
+     * Retrieve the full details of a specific pact. The `api_key` field is only visible to the operator that submitted the pact.
      * @param pact_id The UUID of the pact to retrieve, as returned by the submit or list endpoints.
      * @param X_API_Key 
      * @param options Override http request option.
@@ -106,11 +106,11 @@ export class PactsApi {
 
     /**
      * Get wallet pact history
-     * Return wallet-level pact history buckets for the Pact history chart. Current implementation returns data from persisted transaction data.
-     * @param wallet_id Wallet UUID.
-     * @param range Window range (&#x60;1d&#x60;, &#x60;7d&#x60;, &#x60;30d&#x60;).
-     * @param metric Primary metric hint for pact sorting (&#x60;tx_count&#x60; or &#x60;tx_amount&#x60;).
-     * @param lang Language hint for localized pact titles (&#x60;zh&#x60; or &#x60;en&#x60;).
+     * Retrieve time-bucketed pact activity history for a wallet, suitable for charting. Data is derived from persisted transaction records. Use `range` to select the time window and `metric` to control the sort order.
+     * @param wallet_id The UUID of the wallet to retrieve pact history for.
+     * @param range Time window for the history chart. Allowed values: &#x60;1d&#x60;, &#x60;7d&#x60;, &#x60;30d&#x60;.
+     * @param metric Metric used to sort pacts within each bucket. Possible values: &#x60;tx_count&#x60;, &#x60;tx_amount&#x60;.
+     * @param lang Language for localized pact titles. Possible values: &#x60;en&#x60;, &#x60;zh&#x60;.
      * @param X_API_Key 
      * @param options Override http request option.
      */
@@ -166,19 +166,24 @@ export class PactsApi {
 
     /**
      * Get wallet pact statistics
-     * Return wallet-level pact aggregate metrics for the Pact stats banner. Current implementation returns data from persisted transaction data.
-     * @param wallet_id Wallet UUID.
-     * @param lang Language hint for localized display fields (&#x60;zh&#x60; or &#x60;en&#x60;).
+     * Retrieve aggregate pact metrics for a wallet, such as total pact count, active pacts, and cumulative spend. Data is derived from persisted transaction records.
+     * @param wallet_id The UUID of the wallet to retrieve pact statistics for.
+     * @param include_default Include default pacts (&#x60;is_default&#x3D;true&#x60;) in the statistics. Excluded by default.
+     * @param lang Language for localized display fields. Possible values: &#x60;en&#x60;, &#x60;zh&#x60;.
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async getWalletPactStats(wallet_id: string, lang?: PactStatsLanguage, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseWalletPactStatsRead>> {
+    public async getWalletPactStats(wallet_id: string, include_default?: boolean, lang?: PactStatsLanguage, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseWalletPactStatsRead>> {
         let localVarPath = '/api/v1/wallets/{wallet_id}/pacts/stats'
             .replace(`{${"wallet_id"}}`, encodeURIComponent(String(wallet_id)));
         const localVarUrlObj = new URL(localVarPath, this.basePath);
         const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...options };
         const localVarHeaderParameter: Record<string, string> = { ...this.getHeaders() };
         const localVarQueryParameter: Record<string, any> = {};
+
+        if (include_default !== undefined) {
+            localVarQueryParameter['include_default'] = include_default;
+        }
 
         if (lang !== undefined) {
             localVarQueryParameter['lang'] = lang;
@@ -212,12 +217,12 @@ export class PactsApi {
     }
 
     /**
-     * Get pact event history
-     * Retrieve the full lifecycle event history for the specified pact. Events are returned in chronological order. Use `after` or `before` cursor parameters for cursor-based pagination, or the deprecated `offset` parameter for offset-based pagination. The default page size is 50; maximum is 200.
-     * @param pact_id The UUID of the pact whose event history you want to retrieve, as returned by the submit or list endpoints.
-     * @param after Cursor for forward pagination.
-     * @param before Cursor for backward pagination.
-     * @param offset Deprecated. Use cursors.
+     * List pact events
+     * Retrieve the full lifecycle event history for the specified pact. Events are returned in chronological order. Use `after` or `before` cursor parameters for cursor-based pagination, or the deprecated `offset` parameter for offset-based pagination.
+     * @param pact_id The UUID of the pact whose event history to retrieve, as returned by the submit or list endpoints.
+     * @param after A cursor for forward pagination. Pass the &#x60;after&#x60; value from a previous response to retrieve the next page.
+     * @param before A cursor for backward pagination. Pass the &#x60;before&#x60; value from a previous response to retrieve the preceding page.
+     * @param offset Deprecated. Use &#x60;after&#x60;/&#x60;before&#x60; cursors instead.
      * @param limit The maximum number of items to return. Range: [1, 200].
      * @param X_API_Key 
      * @param options Override http request option.
@@ -278,11 +283,11 @@ export class PactsApi {
      * List pacts visible to the authenticated principal. Agents see pacts they submitted; humans see pacts on wallets they own. Use query parameters to filter by status or wallet.
      * @param status Filter results to pacts with this status. Allowed values: &#x60;PENDING_APPROVAL&#x60;, &#x60;ACTIVE&#x60;, &#x60;COMPLETED&#x60;, &#x60;REVOKED&#x60;, &#x60;WITHDRAWN&#x60;, &#x60;REJECTED&#x60;.
      * @param wallet_id Filter results to pacts associated with this wallet. Pass the UUID of the wallet as returned by the wallets API.
-     * @param after Cursor for forward pagination.
-     * @param before Cursor for backward pagination.
-     * @param offset Deprecated. Use cursors.
-     * @param limit Max results per page.
-     * @param include_default Include default pacts (is_default&#x3D;True) in results. Excluded by default.
+     * @param after A cursor for forward pagination. Pass the &#x60;after&#x60; value from a previous response to retrieve the next page.
+     * @param before A cursor for backward pagination. Pass the &#x60;before&#x60; value from a previous response to retrieve the preceding page.
+     * @param offset Deprecated. Use &#x60;after&#x60;/&#x60;before&#x60; cursors instead.
+     * @param limit The maximum number of items to return. Range: [1, 100].
+     * @param include_default Include default pacts (&#x60;is_default&#x3D;true&#x60;) in results. Excluded by default.
      * @param X_API_Key 
      * @param options Override http request option.
      */
@@ -349,8 +354,8 @@ export class PactsApi {
     }
 
     /**
-     * Revoke an active pact
-     * Revoke an active pact. Only the wallet owner can revoke. This revokes the delegation and invalidates the pact-scoped API key.
+     * Revoke active pact
+     * Revoke an active pact. Only the wallet owner can revoke. Revoking the pact also revokes the associated delegation and invalidates the pact-scoped API key.
      * @param pact_id The UUID of the active pact to revoke, as returned by the submit or list endpoints.
      * @param X_API_Key 
      * @param options Override http request option.
@@ -392,7 +397,7 @@ export class PactsApi {
 
     /**
      * Submit pact for approval
-     * Submit a pact specification for human approval. The operator\'s identity is resolved from the authenticated API key. The pact enters PENDING_APPROVAL status and a notification is sent to the CAW App.
+     * Submit a pact specification for human approval. Your agent\'s identity is resolved from the authenticated API key. The pact enters `PENDING_APPROVAL` status and a notification is sent to the Cobo Agentic Wallet app. For unpaired agents, the pact is auto-approved and enters `ACTIVE` status immediately.
      * @param PactSubmitRequest 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -437,8 +442,8 @@ export class PactsApi {
 
     /**
      * Update completion conditions
-     * Update the completion conditions of an active pact. Only tx_count, amount_spent, and amount_spent_usd conditions may be modified, and thresholds can only be increased — decreasing a threshold could cause the pact to complete prematurely.
-     * @param pact_id The UUID of the active pact whose completion conditions you want to update, as returned by the submit or list endpoints.
+     * Update the completion conditions of an active pact. Only `tx_count`, `amount_spent`, and `amount_spent_usd` conditions may be modified, and thresholds can only be increased — decreasing a threshold could cause the pact to complete prematurely.
+     * @param pact_id The UUID of the active pact whose completion conditions to update, as returned by the submit or list endpoints.
      * @param PactUpdateCompletionConditionsRequest 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -484,8 +489,8 @@ export class PactsApi {
 
     /**
      * Update pact policies
-     * Full-replace the delegation-scoped policies of an active pact. Old policies are removed and the new list is created atomically within a single transaction to avoid a window with no policies. Only the wallet owner can update policies on an active pact.
-     * @param pact_id The UUID of the active pact whose policies you want to replace, as returned by the submit or list endpoints.
+     * Full-replace the delegation-scoped policies of an active pact. Existing policies are removed and the new list is created atomically to avoid a window with no policies. Only the wallet owner can update policies on an active pact.
+     * @param pact_id The UUID of the active pact whose policies to replace, as returned by the submit or list endpoints.
      * @param PactUpdatePoliciesRequest 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -530,8 +535,8 @@ export class PactsApi {
     }
 
     /**
-     * Withdraw a pending pact
-     * Withdraw a pact that is still pending approval. Only the operator agent that submitted the pact can withdraw it. The linked approval is also rejected.
+     * Withdraw pending pact
+     * Withdraw a pact that is still pending approval. Only the operator agent that submitted the pact can withdraw it. The linked approval request is also rejected.
      * @param pact_id The UUID of the pending pact to withdraw, as returned by the submit or list endpoints.
      * @param X_API_Key 
      * @param options Override http request option.

@@ -19,7 +19,7 @@ import type { RecipeStatus } from './recipe-status';
 
 
 /**
- * RecipeCreateResult
+ * Result returned after creating or submitting a recipe.
  * @export
  * @interface RecipeCreateResult
  */
@@ -43,7 +43,7 @@ export interface RecipeCreateResult {
      */
     'url': string;
     /**
-     * 
+     * Initial publication status after creation. Possible values: `draft`, `pending_review`, `published`, `rejected`.
      * @type {RecipeStatus}
      * @memberof RecipeCreateResult
      */

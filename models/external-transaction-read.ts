@@ -12,6 +12,15 @@
 
 
 
+// @ts-ignore
+import type { ExternalTransactionOperationType } from './external-transaction-operation-type';
+
+// @ts-ignore
+import type { ExternalTransactionStage } from './external-transaction-stage';
+
+// @ts-ignore
+import type { TransactionProvider } from './transaction-provider';
+
 
 
 
@@ -34,23 +43,23 @@ export interface ExternalTransactionRead {
      */
     'user_transaction_uuid': string;
     /**
-     * The operation type (transfer, contract_call, deposit, message_sign).
-     * @type {string}
+     * The operation the ET performs. Possible values: `transfer`, `contract_call`, `message_sign`, `deposit`.
+     * @type {ExternalTransactionOperationType}
      * @memberof ExternalTransactionRead
      */
-    'operation_type': string;
+    'operation_type': ExternalTransactionOperationType;
     /**
-     * Stage within the UT lifecycle (original, drop, speedup).
-     * @type {string}
+     * Stage within the UT lifecycle. Possible values: `original`, `sign`, `broadcast`, `drop`, `speedup`, `delegation`, `userop`, `provider_userop`.
+     * @type {ExternalTransactionStage}
      * @memberof ExternalTransactionRead
      */
-    'stage'?: string;
+    'stage'?: ExternalTransactionStage;
     /**
-     * Downstream provider (waas, pimlico, alchemy).
-     * @type {string}
+     * Downstream provider that executes this ET. Possible values: `waas`, `alchemy`, `pimlico`, `node_rpc`.
+     * @type {TransactionProvider}
      * @memberof ExternalTransactionRead
      */
-    'provider'?: string;
+    'provider'?: TransactionProvider;
     /**
      * Provider-assigned transaction ID (e.g. WaaS cobo_tx_id).
      * @type {string}

@@ -22,7 +22,7 @@ import type { RecipeSearchSource } from './recipe-search-source';
 
 
 /**
- * SearchRecipesRequest
+ * Request payload for recipe search across graph-based or knowledge-base sources.
  * @export
  * @interface SearchRecipesRequest
  */

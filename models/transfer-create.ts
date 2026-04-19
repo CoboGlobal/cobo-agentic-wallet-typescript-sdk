@@ -13,7 +13,7 @@
 
 
 // @ts-ignore
-import type { Fee } from './fee';
+import type { FeeRequest } from './fee-request';
 
 
 
@@ -55,11 +55,11 @@ export interface TransferCreate {
      */
     'request_id'?: string;
     /**
-     * Optional custom fee parameters. If omitted, the network default is used.
-     * @type {Fee}
+     * 
+     * @type {FeeRequest}
      * @memberof TransferCreate
      */
-    'fee'?: Fee;
+    'fee'?: FeeRequest | null;
     /**
      * The source address to transfer from. If omitted, the server auto-selects the wallet address on this chain with the highest available `token_id` balance (explicit `src_addr` always takes precedence).
      * @type {string}

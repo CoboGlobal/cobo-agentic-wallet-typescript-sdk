@@ -14,9 +14,9 @@ import globalAxios from 'axios';
 import { Configuration, getServerUrl } from '../configuration';
 import { assertParamExists } from '../common';
 // @ts-ignore
-import type { StandardResponseListTransactionRecordRead } from '../models';
+import type { StandardResponseListUserTransactionRead } from '../models';
 // @ts-ignore
-import type { StandardResponseTransactionRecordRead } from '../models';
+import type { StandardResponseUserTransactionRead } from '../models';
 // @ts-ignore
 import type { WrappedValidationError } from '../models';
 
@@ -51,7 +51,7 @@ export class TransactionRecordsApi {
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async getTransactionRecord(wallet_uuid: string, record_uuid: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseTransactionRecordRead>> {
+    public async getUserTransaction(wallet_uuid: string, record_uuid: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseUserTransactionRead>> {
         let localVarPath = '/api/v1/wallets/{wallet_uuid}/transactions/{record_uuid}'
             .replace(`{${"wallet_uuid"}}`, encodeURIComponent(String(wallet_uuid)))
             .replace(`{${"record_uuid"}}`, encodeURIComponent(String(record_uuid)));
@@ -100,7 +100,7 @@ export class TransactionRecordsApi {
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async getTransactionRecordByRequestId(wallet_uuid: string, request_id: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseTransactionRecordRead>> {
+    public async getUserTransactionByRequestId(wallet_uuid: string, request_id: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseUserTransactionRead>> {
         let localVarPath = '/api/v1/wallets/{wallet_uuid}/transactions/by-request-id/{request_id}'
             .replace(`{${"wallet_uuid"}}`, encodeURIComponent(String(wallet_uuid)))
             .replace(`{${"request_id"}}`, encodeURIComponent(String(request_id)));
@@ -148,7 +148,7 @@ export class TransactionRecordsApi {
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async getTransactionRecordByUuid(record_uuid: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseTransactionRecordRead>> {
+    public async getUserTransactionByUuid(record_uuid: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseUserTransactionRead>> {
         let localVarPath = '/api/v1/wallets/transactions/{record_uuid}'
             .replace(`{${"record_uuid"}}`, encodeURIComponent(String(record_uuid)));
         const localVarUrlObj = new URL(localVarPath, this.basePath);
@@ -196,7 +196,7 @@ export class TransactionRecordsApi {
      * @param offset Deprecated. Use &#x60;after&#x60;/&#x60;before&#x60; cursors instead.
      * @param limit The maximum number of items to return. Range: [1, 200].
      * @param status Filter records by transaction status. Accepts UserTransactionStatus integer values (e.g. &#x60;900&#x60; for success, &#x60;901&#x60; for failed) or label strings (e.g. &#x60;success&#x60;, &#x60;processing&#x60;). If omitted, all statuses are returned.
-     * @param type Filter records by transaction type. Possible values: &#x60;transfer&#x60;, &#x60;contract_call&#x60;, &#x60;deposit&#x60;, &#x60;message_sign&#x60;. If omitted, all types are returned.
+     * @param type Filter records by transaction type. Possible values: &#x60;transfer&#x60;, &#x60;contract_call&#x60;, &#x60;deposit&#x60;, &#x60;message_sign&#x60;, &#x60;x402_payment&#x60;, &#x60;mpp_payment&#x60;. If omitted, all types are returned.
      * @param token_id Filter records by token ID (for example, &#x60;SETH&#x60;, &#x60;SETH_USDC&#x60;). Use the Cobo token ID format. If omitted, all tokens are returned.
      * @param chain_id Filter records by Cobo chain ID (for example, &#x60;ETH&#x60;, &#x60;BASE_ETH&#x60;, &#x60;SOL&#x60;). If omitted, all chains are returned.
      * @param address_id Filter records by blockchain address. Matches source or destination address. If omitted, records for all addresses are returned.
@@ -204,7 +204,7 @@ export class TransactionRecordsApi {
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async listTransactionRecords(wallet_uuid?: string, after?: string, before?: string, offset?: number, limit?: number, status?: string, type?: string, token_id?: string, chain_id?: string, address_id?: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseListTransactionRecordRead>> {
+    public async listUserTransactions(wallet_uuid?: string, after?: string, before?: string, offset?: number, limit?: number, status?: string, type?: string, token_id?: string, chain_id?: string, address_id?: string, ext?: boolean, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseListUserTransactionRead>> {
         let localVarPath = '/api/v1/wallets/transactions';
         const localVarUrlObj = new URL(localVarPath, this.basePath);
         const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...options };

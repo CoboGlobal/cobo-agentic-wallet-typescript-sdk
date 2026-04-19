@@ -14,15 +14,16 @@
 
 
 /**
- * Supported policy categories.  Subset of ``caw_types.transaction.UserTransactionOperationType`` — values are shared so UT operation_type strings can be compared directly against PolicyType. Deposit is excluded because deposits are not policy-gated.
+ * UserTransactionOperationType
  * @export
  * @enum {string}
  */
-export const PolicyType = {
+export const UserTransactionOperationType = {
     transfer: 'transfer' as const,
     contract_call: 'contract_call' as const,
     message_sign: 'message_sign' as const,
+    deposit: 'deposit' as const,
 } as const;
 
-export type PolicyType = typeof PolicyType[keyof typeof PolicyType];
+export type UserTransactionOperationType = typeof UserTransactionOperationType[keyof typeof UserTransactionOperationType];
 

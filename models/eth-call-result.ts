@@ -16,22 +16,16 @@
 
 
 /**
- * CLI telemetry feature-flag configuration.
+ * Result of an eth_call proxy request.
  * @export
- * @interface TelemetryConfigResponse
+ * @interface EthCallResult
  */
-export interface TelemetryConfigResponse {
+export interface EthCallResult {
     /**
-     * 
-     * @type {boolean}
-     * @memberof TelemetryConfigResponse
-     */
-    'enabled'?: boolean;
-    /**
-     * 
+     * Raw hex result returned by the EVM node.
      * @type {string}
-     * @memberof TelemetryConfigResponse
+     * @memberof EthCallResult
      */
-    'upload_url'?: string;
+    'result': string;
 }
 

@@ -68,6 +68,7 @@ export class RecipesApi {
 
     /**
      * Archive recipe
+     * Archive a recipe, removing it from public visibility. Requires service credential authentication. Archived recipes are not deleted and can be restored.
      * @param recipe_id 
      * @param X_Assistant_Service_Key 
      * @param options Override http request option.
@@ -109,6 +110,7 @@ export class RecipesApi {
 
     /**
      * Create recipe
+     * Create and publish a new recipe in the library. Requires service credential authentication. The recipe is synced to the knowledge hub after creation.
      * @param RecipeCreate 
      * @param X_Assistant_Service_Key 
      * @param options Override http request option.
@@ -153,8 +155,9 @@ export class RecipesApi {
 
     /**
      * Get recipe detail by slug
+     * Retrieve the full details of a public recipe by its URL slug.
      * @param slug 
-     * @param track_view 
+     * @param track_view When &#x60;true&#x60; (default), increment the recipe\&#39;s view counter.
      * @param options Override http request option.
      */
     public async getRecipeBySlug(slug: string, track_view?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseRecipeDetailRead>> {
@@ -194,8 +197,9 @@ export class RecipesApi {
 
     /**
      * Get full recipe document by ID
+     * Retrieve the full content of a recipe document by its knowledge hub or graph document ID. The `document_id` is returned in search results.
      * @param document_id 
-     * @param source Document source: \&#39;graph\&#39; or \&#39;knowledge\&#39;
+     * @param source Document source to retrieve from. Possible values: &#x60;graph&#x60;, &#x60;knowledge&#x60;.
      * @param X_API_Key 
      * @param options Override http request option.
      */
@@ -240,6 +244,7 @@ export class RecipesApi {
 
     /**
      * Get recipe search count
+     * Retrieve the total number of times a recipe has appeared in search results.
      * @param recipe_id 
      * @param options Override http request option.
      */
@@ -276,7 +281,8 @@ export class RecipesApi {
 
     /**
      * List featured recipes
-     * @param limit 
+     * Retrieve the list of editorially featured recipes from the public library.
+     * @param limit The maximum number of featured recipes to return. Range: [1, 50].
      * @param options Override http request option.
      */
     public async listFeaturedRecipes(limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseListRecipeRead>> {
@@ -315,6 +321,7 @@ export class RecipesApi {
 
     /**
      * List recipe categories
+     * Retrieve all available recipe categories from the public library.
      * @param options Override http request option.
      */
     public async listRecipeCategories(options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseListRecipeCategoryRead>> {
@@ -349,14 +356,15 @@ export class RecipesApi {
 
     /**
      * List recipes in the public library
-     * @param offset 
-     * @param limit 
-     * @param category 
-     * @param tag 
-     * @param chain 
-     * @param featured 
-     * @param query 
-     * @param sort_by 
+     * Retrieve published recipes from the public recipe library. Filter by category, tag, chain, or keyword. Use `offset` and `limit` for pagination.
+     * @param offset Number of items to skip before returning results.
+     * @param limit The maximum number of items to return. Range: [1, 100].
+     * @param category Filter recipes by category slug.
+     * @param tag Filter recipes by tag.
+     * @param chain Filter recipes by blockchain (e.g. &#x60;ETH&#x60;, &#x60;SOL&#x60;).
+     * @param featured When &#x60;true&#x60;, return only featured recipes. When &#x60;false&#x60;, exclude featured recipes. Omit to return all.
+     * @param query Keyword search string to filter recipes by title or description.
+     * @param sort_by Sort order for results. Possible values: &#x60;popular&#x60;, &#x60;newest&#x60;, &#x60;most_used&#x60;.
      * @param options Override http request option.
      */
     public async listRecipeLibrary(offset?: number, limit?: number, category?: string, tag?: string, chain?: string, featured?: boolean, query?: string, sort_by?: RecipeLibrarySortBy, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseListRecipeRead>> {
@@ -423,6 +431,7 @@ export class RecipesApi {
 
     /**
      * Review submitted recipe
+     * Approve or reject a community-submitted recipe. Requires service credential authentication. Approved recipes are published to the library and synced to the knowledge hub.
      * @param recipe_id 
      * @param RecipeReviewRequest 
      * @param X_Assistant_Service_Key 
@@ -469,6 +478,7 @@ export class RecipesApi {
 
     /**
      * Search recipes
+     * Search the recipe library using natural language. Set `source` to `knowledge` (default) to query the knowledge hub, or `graph` to query the LightRAG graph index. Optionally filter results by `chain` or `token`.
      * @param SearchRecipesRequest 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -513,6 +523,7 @@ export class RecipesApi {
 
     /**
      * Submit community recipe
+     * Submit a community-contributed recipe for review. The recipe enters a pending state until reviewed and approved by an admin.
      * @param RecipeSubmissionCreate 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -557,6 +568,7 @@ export class RecipesApi {
 
     /**
      * Increment recipe share count
+     * Increment the share counter for a recipe. Call this endpoint when a user shares the recipe externally.
      * @param recipe_id 
      * @param options Override http request option.
      */
@@ -593,6 +605,7 @@ export class RecipesApi {
 
     /**
      * Increment recipe use count
+     * Increment the use counter for a recipe. Call this endpoint when an authenticated user activates or runs a recipe.
      * @param recipe_id 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -634,6 +647,7 @@ export class RecipesApi {
 
     /**
      * Update recipe
+     * Update an existing recipe in the library. Requires service credential authentication. Only provided fields are updated. The recipe is re-synced to the knowledge hub after the update.
      * @param recipe_id 
      * @param RecipeUpdate 
      * @param X_Assistant_Service_Key 

@@ -28,19 +28,19 @@ import type { PolicyType } from './policy-type';
  */
 export interface PolicyCreate {
     /**
-     * 
+     * Policy scope. Possible values: `global` (platform-wide, DENY only), `wallet` (wallet-scoped), `delegation` (delegation-scoped, ALLOW only).
      * @type {PolicyScope}
      * @memberof PolicyCreate
      */
     'scope': PolicyScope;
     /**
-     * 
+     * UUID of the wallet this policy applies to. Required when `scope=wallet`; derived from the delegation when `scope=delegation`; must be null for `scope=global`.
      * @type {string}
      * @memberof PolicyCreate
      */
     'wallet_id'?: string;
     /**
-     * 
+     * UUID of the delegation this policy applies to. Required when `scope=delegation`; must be null for other scopes.
      * @type {string}
      * @memberof PolicyCreate
      */
@@ -52,25 +52,25 @@ export interface PolicyCreate {
      */
     'name': string;
     /**
-     * 
+     * Policy category. Possible values: `transfer`, `contract_call`, `message_sign`.
      * @type {PolicyType}
      * @memberof PolicyCreate
      */
     'policy_type': PolicyType;
     /**
-     * 
+     * Policy rule configuration. Structure depends on `policy_type`.
      * @type {object}
      * @memberof PolicyCreate
      */
     'rules': object;
     /**
-     * 
+     * Evaluation priority. Higher values take precedence when multiple policies match.
      * @type {number}
      * @memberof PolicyCreate
      */
     'priority'?: number;
     /**
-     * 
+     * Whether this policy is active. `true`: enforced. `false`: disabled.
      * @type {boolean}
      * @memberof PolicyCreate
      */

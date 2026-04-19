@@ -76,7 +76,7 @@ export interface RecipeSubmissionCreate {
      */
     'example_prompts'?: Array<string>;
     /**
-     * 
+     * Icon URL
      * @type {string}
      * @memberof RecipeSubmissionCreate
      */

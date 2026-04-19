@@ -25,43 +25,43 @@ import type { PendingOperationType } from './pending-operation-type';
  */
 export interface PolicyDryRunRequest {
     /**
-     * 
+     * UUID of the wallet to evaluate policies against.
      * @type {string}
      * @memberof PolicyDryRunRequest
      */
     'wallet_id': string;
     /**
-     * 
+     * UUID of the delegation to include in the evaluation. Null for owner-initiated operations.
      * @type {string}
      * @memberof PolicyDryRunRequest
      */
     'delegation_id'?: string;
     /**
-     * 
+     * Operation type to simulate. Possible values: `transfer`, `contract_call`, `message_sign`.
      * @type {PendingOperationType}
      * @memberof PolicyDryRunRequest
      */
     'operation_type': PendingOperationType;
     /**
-     * 
+     * Amount for the simulated operation as a decimal string. For `contract_call`, use `0` if no value is sent.
      * @type {string}
      * @memberof PolicyDryRunRequest
      */
     'amount': string;
     /**
-     * 
+     * Cobo chain ID for the simulated operation (for example, `SETH`, `BASE_ETH`, `SOL`).
      * @type {string}
      * @memberof PolicyDryRunRequest
      */
     'chain_id': string;
     /**
-     * 
+     * Cobo token ID for the simulated transfer (for example, `SETH`, `SETH_USDC`). Required for `transfer` operations.
      * @type {string}
      * @memberof PolicyDryRunRequest
      */
     'token_id'?: string;
     /**
-     * 
+     * Destination on-chain address. Required for `transfer` operations.
      * @type {string}
      * @memberof PolicyDryRunRequest
      */

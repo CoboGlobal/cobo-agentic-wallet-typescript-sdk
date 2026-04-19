@@ -55,19 +55,19 @@ export interface RecipeDetailRead {
      */
     'example_prompts': Array<string>;
     /**
-     * 
+     * Blockchain identifiers this recipe applies to (for example, `ethereum`, `solana`).
      * @type {Array<string>}
      * @memberof RecipeDetailRead
      */
     'chains': Array<string>;
     /**
-     * 
+     * Descriptive tags for filtering and discovery.
      * @type {Array<string>}
      * @memberof RecipeDetailRead
      */
     'tags': Array<string>;
     /**
-     * 
+     * Category labels used to group recipes in the library.
      * @type {Array<string>}
      * @memberof RecipeDetailRead
      */
@@ -77,7 +77,7 @@ export interface RecipeDetailRead {
      * @type {string}
      * @memberof RecipeDetailRead
      */
-    'icon': string;
+    'icon': string | null;
     /**
      * 
      * @type {string}
@@ -85,43 +85,43 @@ export interface RecipeDetailRead {
      */
     'author_name': string;
     /**
-     * 
+     * Publication status of the recipe. Possible values: `draft`, `pending_review`, `published`, `rejected`.
      * @type {RecipeStatus}
      * @memberof RecipeDetailRead
      */
     'status': RecipeStatus;
     /**
-     * 
+     * When `true`, the recipe is highlighted in the library. When `false`, it appears in the standard listing.
      * @type {boolean}
      * @memberof RecipeDetailRead
      */
     'featured': boolean;
     /**
-     * 
+     * When `true`, the recipe has been reviewed and verified by the platform. When `false`, it is community-submitted.
      * @type {boolean}
      * @memberof RecipeDetailRead
      */
     'verified': boolean;
     /**
-     * 
+     * Total number of times this recipe has been viewed.
      * @type {number}
      * @memberof RecipeDetailRead
      */
     'view_count': number;
     /**
-     * 
+     * Total number of times this recipe has been used to start a task.
      * @type {number}
      * @memberof RecipeDetailRead
      */
     'use_count': number;
     /**
-     * 
+     * Total number of times this recipe has been shared.
      * @type {number}
      * @memberof RecipeDetailRead
      */
     'share_count': number;
     /**
-     * 
+     * Total number of times this recipe has appeared in search results.
      * @type {number}
      * @memberof RecipeDetailRead
      */

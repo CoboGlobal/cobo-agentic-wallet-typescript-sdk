@@ -31,25 +31,25 @@ export interface InlinePolicyCreate {
      */
     'name': string;
     /**
-     * 
+     * Policy category. Possible values: `transfer`, `contract_call`, `message_sign`.
      * @type {PolicyType}
      * @memberof InlinePolicyCreate
      */
     'type': PolicyType;
     /**
-     * 
+     * Policy rule configuration. Structure depends on `type`; see the policy rules schema for each type.
      * @type {{ [key: string]: any; }}
      * @memberof InlinePolicyCreate
      */
     'rules'?: { [key: string]: any; };
     /**
-     * 
+     * Evaluation priority. Higher values take precedence when multiple policies match.
      * @type {number}
      * @memberof InlinePolicyCreate
      */
     'priority'?: number;
     /**
-     * 
+     * Whether this policy is active. `true`: enforced. `false`: disabled.
      * @type {boolean}
      * @memberof InlinePolicyCreate
      */

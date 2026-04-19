@@ -43,8 +43,8 @@ export class SuggestionsApi {
     }
 
     /**
-     * Get Suggestion
-     * Return the suggestion message for a given key.  Looks up Redis hash ``cli_suggestions`` field ``{key}`` first; falls back to the built-in default if Redis is unavailable or the field is not set. Returns empty string if the key has no built-in default. Returns 422 automatically for unrecognised keys (enforced by SuggestionKey enum).
+     * Get suggestion by key
+     * Retrieve the suggestion message for a given key. Checks the Redis hash `cli_suggestions` field `{key}` first; falls back to the built-in default if Redis is unavailable or the field is not set. Returns an empty string if the key has no built-in default. Returns HTTP 422 automatically for unrecognized keys (enforced by the `SuggestionKey` enum).
      * @param key 
      * @param X_API_Key 
      * @param options Override http request option.

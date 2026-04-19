@@ -13,7 +13,7 @@
 
 
 // @ts-ignore
-import type { Fee } from './fee';
+import type { FeeRequest } from './fee-request';
 
 
 
@@ -32,10 +32,10 @@ export interface SpeedupTransactionRequest {
     'request_id'?: string;
     /**
      * Custom fee parameters for the replacement (speed-up) transaction. Must specify a higher fee than the original transaction to satisfy RBF requirements.
-     * @type {Fee}
+     * @type {FeeRequest}
      * @memberof SpeedupTransactionRequest
      */
-    'fee': Fee;
+    'fee': FeeRequest;
     /**
      * The provider-side transaction ID of the transaction to speed up. Retrieve this from the original transfer or contract call response.
      * @type {string}

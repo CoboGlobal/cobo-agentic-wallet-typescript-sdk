@@ -25,13 +25,13 @@ import type { CompletionConditionType } from './completion-condition-type';
  */
 export interface CompletionCondition {
     /**
-     * 
+     * Condition type. Possible values: `time_elapsed` (seconds since activation), `tx_count` (transaction count), `amount_spent` (token amount), `amount_spent_usd` (USD value), `manual` (no automatic trigger).
      * @type {CompletionConditionType}
      * @memberof CompletionCondition
      */
     'type': CompletionConditionType;
     /**
-     * 
+     * Threshold value that triggers completion. Required for all types except `manual`. Format varies by type: integer string for `tx_count`, decimal string for amounts, integer seconds for `time_elapsed`.
      * @type {string}
      * @memberof CompletionCondition
      */

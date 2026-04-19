@@ -19,7 +19,7 @@ import type { RecipeStatus } from './recipe-status';
 
 
 /**
- * RecipeRead
+ * Recipe library entry returned from the API.
  * @export
  * @interface RecipeRead
  */
@@ -49,25 +49,25 @@ export interface RecipeRead {
      */
     'description': string;
     /**
-     * 
+     * Sample prompts that demonstrate how to invoke this recipe.
      * @type {Array<string>}
      * @memberof RecipeRead
      */
     'example_prompts': Array<string>;
     /**
-     * 
+     * Blockchain identifiers this recipe applies to (for example, `ethereum`, `solana`).
      * @type {Array<string>}
      * @memberof RecipeRead
      */
     'chains': Array<string>;
     /**
-     * 
+     * Descriptive tags for filtering and discovery.
      * @type {Array<string>}
      * @memberof RecipeRead
      */
     'tags': Array<string>;
     /**
-     * 
+     * Category labels used to group recipes in the library.
      * @type {Array<string>}
      * @memberof RecipeRead
      */
@@ -77,7 +77,7 @@ export interface RecipeRead {
      * @type {string}
      * @memberof RecipeRead
      */
-    'icon': string;
+    'icon': string | null;
     /**
      * 
      * @type {string}
@@ -85,43 +85,43 @@ export interface RecipeRead {
      */
     'author_name': string;
     /**
-     * 
+     * Publication status of the recipe. Possible values: `draft`, `pending_review`, `published`, `rejected`.
      * @type {RecipeStatus}
      * @memberof RecipeRead
      */
     'status': RecipeStatus;
     /**
-     * 
+     * When `true`, the recipe is highlighted in the library. When `false`, it appears in the standard listing.
      * @type {boolean}
      * @memberof RecipeRead
      */
     'featured': boolean;
     /**
-     * 
+     * When `true`, the recipe has been reviewed and verified by the platform. When `false`, it is community-submitted.
      * @type {boolean}
      * @memberof RecipeRead
      */
     'verified': boolean;
     /**
-     * 
+     * Total number of times this recipe has been viewed.
      * @type {number}
      * @memberof RecipeRead
      */
     'view_count': number;
     /**
-     * 
+     * Total number of times this recipe has been used to start a task.
      * @type {number}
      * @memberof RecipeRead
      */
     'use_count': number;
     /**
-     * 
+     * Total number of times this recipe has been shared.
      * @type {number}
      * @memberof RecipeRead
      */
     'share_count': number;
     /**
-     * 
+     * Total number of times this recipe has appeared in search results.
      * @type {number}
      * @memberof RecipeRead
      */

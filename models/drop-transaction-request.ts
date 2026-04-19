@@ -13,7 +13,7 @@
 
 
 // @ts-ignore
-import type { Fee } from './fee';
+import type { FeeRequest } from './fee-request';
 
 
 
@@ -31,11 +31,11 @@ export interface DropTransactionRequest {
      */
     'request_id'?: string;
     /**
-     * Custom fee parameters for the replacement transaction. Required when the transaction is broadcasting (RBF drop).
-     * @type {Fee}
+     * 
+     * @type {FeeRequest}
      * @memberof DropTransactionRequest
      */
-    'fee'?: Fee;
+    'fee'?: FeeRequest | null;
     /**
      * The provider-side transaction ID to cancel. The transaction ID can be retrieved from the transfer or contract call response.
      * @type {string}

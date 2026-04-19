@@ -25,25 +25,25 @@ import type { MessageSignDestType } from './message-sign-dest-type';
  */
 export interface MessageSignResult {
     /**
-     * 
+     * User transaction UUID assigned at submission time. Null if creation failed before assignment.
      * @type {string}
      * @memberof MessageSignResult
      */
     'id'?: string;
     /**
-     * 
+     * Whether this response was returned from a previously submitted request with the same `request_id`. `true`: idempotent replay. `false`: new submission.
      * @type {boolean}
      * @memberof MessageSignResult
      */
     'idempotent'?: boolean;
     /**
-     * 
+     * Client-supplied request identifier used for idempotency.
      * @type {string}
      * @memberof MessageSignResult
      */
     'request_id'?: string;
     /**
-     * 
+     * The user transaction status code. Typical values: 100 (pending approval), 900 (success), 901 (failed), 902 (rejected).
      * @type {number}
      * @memberof MessageSignResult
      */
@@ -61,7 +61,7 @@ export interface MessageSignResult {
      */
     'approval_id'?: string;
     /**
-     * 
+     * Signing type used for this request. Possible values: `eip712`.
      * @type {MessageSignDestType}
      * @memberof MessageSignResult
      */

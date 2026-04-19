@@ -46,7 +46,7 @@ export class TelemetryApi {
 
     /**
      * Get telemetry config
-     * Return the CLI telemetry feature-flag configuration for your authenticated session.  The response includes: - `enabled` — whether CLI telemetry collection is active. - `upload_url` — destination URL for telemetry uploads; empty string if not configured.
+     * Return the CLI telemetry feature-flag configuration for your authenticated session. The response includes `enabled` (whether CLI telemetry collection is active) and `upload_url` (destination URL for telemetry uploads; empty string if not configured).
      * @param X_API_Key 
      * @param options Override http request option.
      */
@@ -86,7 +86,7 @@ export class TelemetryApi {
 
     /**
      * Ingest session telemetry
-     * Receive a session telemetry record that may contain nested child spans.  Uses the Langfuse SDK directly to preserve parent-child span nesting. Requires authentication.  Returns 204 on success.
+     * Receive a session telemetry record that may contain nested child spans. Uses the Langfuse SDK directly to preserve parent-child span nesting. Returns HTTP 204 on success. Requires authentication.
      * @param SessionRecord 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -131,7 +131,7 @@ export class TelemetryApi {
 
     /**
      * Ingest CLI telemetry record
-     * Receive a CLI telemetry record from your agent, extract structured fields, and forward them to Logstash/Kibana via structured logging and an OpenTelemetry span.  Returns 204 on success. Requires authentication.
+     * Receive a CLI telemetry record from your agent, extract structured fields, and forward them to Logstash/Kibana via structured logging and an OpenTelemetry span. Returns HTTP 204 on success. Requires authentication.
      * @param LangfuseRecord 
      * @param X_API_Key 
      * @param options Override http request option.
@@ -176,7 +176,7 @@ export class TelemetryApi {
 
     /**
      * Ingest raw Langfuse record
-     * Receive a raw Langfuse telemetry record from your agent and re-emit it as an OpenTelemetry span.  Returns 204 on success. Requires authentication.
+     * Receive a raw Langfuse telemetry record from your agent and re-emit it as an OpenTelemetry span. Returns HTTP 204 on success. Requires authentication.
      * @param LangfuseRecord 
      * @param X_API_Key 
      * @param options Override http request option.
