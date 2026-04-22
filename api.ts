@@ -20,7 +20,6 @@ export * from './api/metadata-api';
 export * from './api/pacts-api';
 export * from './api/pending-operations-api';
 export * from './api/recipes-api';
-export * from './api/script-tools-api';
 export * from './api/suggestions-api';
 export * from './api/telemetry-api';
 export * from './api/transaction-records-api';

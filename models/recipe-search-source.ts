@@ -19,7 +19,6 @@
  * @enum {string}
  */
 export const RecipeSearchSource = {
-    graph: 'graph' as const,
     knowledge: 'knowledge' as const,
 } as const;
 

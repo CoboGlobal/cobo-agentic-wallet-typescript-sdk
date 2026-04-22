@@ -20,8 +20,6 @@ import type { RecipeLibrarySortBy } from '../models';
 // @ts-ignore
 import type { RecipeReviewRequest } from '../models';
 // @ts-ignore
-import type { RecipeSearchSource } from '../models';
-// @ts-ignore
 import type { RecipeSubmissionCreate } from '../models';
 // @ts-ignore
 import type { RecipeUpdate } from '../models';
@@ -197,23 +195,18 @@ export class RecipesApi {
 
     /**
      * Get full recipe document by ID
-     * Retrieve the full content of a recipe document by its knowledge hub or graph document ID. The `document_id` is returned in search results.
+     * Retrieve the full content of a recipe document by its knowledge hub document ID. The `document_id` is returned in search results.
      * @param document_id 
-     * @param source Document source to retrieve from. Possible values: &#x60;graph&#x60;, &#x60;knowledge&#x60;.
      * @param X_API_Key 
      * @param options Override http request option.
      */
-    public async getRecipeDocument(document_id: string, source?: RecipeSearchSource, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseRecipeDocument>> {
+    public async getRecipeDocument(document_id: string, X_API_Key?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<StandardResponseRecipeDocument>> {
         let localVarPath = '/api/v1/recipes/{document_id}'
             .replace(`{${"document_id"}}`, encodeURIComponent(String(document_id)));
         const localVarUrlObj = new URL(localVarPath, this.basePath);
         const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...options };
         const localVarHeaderParameter: Record<string, string> = { ...this.getHeaders() };
         const localVarQueryParameter: Record<string, any> = {};
-
-        if (source !== undefined) {
-            localVarQueryParameter['source'] = source;
-        }
 
         if (X_API_Key !== undefined && X_API_Key !== null) {
             localVarHeaderParameter['X-API-Key'] = String(X_API_Key);
@@ -478,7 +471,7 @@ export class RecipesApi {
 
     /**
      * Search recipes
-     * Search the recipe library using natural language. Set `source` to `knowledge` (default) to query the knowledge hub, or `graph` to query the LightRAG graph index. Optionally filter results by `chain` or `token`.
+     * Search the recipe library using natural language via the knowledge hub. Optionally filter results by `chain` or `token`.
      * @param SearchRecipesRequest 
      * @param X_API_Key 
      * @param options Override http request option.

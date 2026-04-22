@@ -22,7 +22,7 @@ import type { RecipeSearchSource } from './recipe-search-source';
 
 
 /**
- * Request payload for recipe search across graph-based or knowledge-base sources.
+ * Request payload for recipe knowledge-base search.
  * @export
  * @interface SearchRecipesRequest
  */
@@ -34,47 +34,11 @@ export interface SearchRecipesRequest {
      */
     'query': string;
     /**
-     * Search source: \'graph\' for graph-based search, \'knowledge\' for knowledge base
+     * Search source (only \'knowledge\' is supported)
      * @type {RecipeSearchSource}
      * @memberof SearchRecipesRequest
      */
     'source'?: RecipeSearchSource;
-    /**
-     * Search mode: local, global, or mix
-     * @type {string}
-     * @memberof SearchRecipesRequest
-     */
-    'mode'?: string;
-    /**
-     * Entities (local/mix) or relationships (global/mix) count
-     * @type {number}
-     * @memberof SearchRecipesRequest
-     */
-    'top_k'?: number;
-    /**
-     * Text chunks from vector search
-     * @type {number}
-     * @memberof SearchRecipesRequest
-     */
-    'chunk_top_k'?: number;
-    /**
-     * Token budget for entity context
-     * @type {number}
-     * @memberof SearchRecipesRequest
-     */
-    'max_entity_tokens'?: number;
-    /**
-     * Token budget for relation context
-     * @type {number}
-     * @memberof SearchRecipesRequest
-     */
-    'max_relation_tokens'?: number;
-    /**
-     * Overall token ceiling; chunks get whatever remains after KG context
-     * @type {number}
-     * @memberof SearchRecipesRequest
-     */
-    'max_total_tokens'?: number;
     /**
      * Max results for knowledge search
      * @type {number}
