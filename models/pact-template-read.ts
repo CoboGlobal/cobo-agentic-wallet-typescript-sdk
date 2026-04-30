@@ -16,40 +16,40 @@
 
 
 /**
- * A candidate token returned when resolving by symbol.
+ * Response for a pact template.
  * @export
- * @interface TokenCandidate
+ * @interface PactTemplateRead
  */
-export interface TokenCandidate {
+export interface PactTemplateRead {
     /**
      * 
      * @type {string}
-     * @memberof TokenCandidate
+     * @memberof PactTemplateRead
      */
-    'token_id': string;
+    'id': string;
     /**
      * 
      * @type {string}
-     * @memberof TokenCandidate
+     * @memberof PactTemplateRead
      */
-    'symbol': string;
+    'recipe_slug': string;
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof PactTemplateRead
+     */
+    'template': { [key: string]: any; };
     /**
      * 
      * @type {string}
-     * @memberof TokenCandidate
+     * @memberof PactTemplateRead
      */
-    'chain_id': string;
+    'created_at': string;
     /**
      * 
      * @type {string}
-     * @memberof TokenCandidate
+     * @memberof PactTemplateRead
      */
-    'chain_name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenCandidate
-     */
-    'token_address'?: string;
+    'updated_at': string;
 }
 

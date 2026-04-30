@@ -13,7 +13,7 @@
 
 
 // @ts-ignore
-import type { FaucetTokenItem } from './faucet-token-item';
+import type { PactTemplateRead } from './pact-template-read';
 
 // @ts-ignore
 import type { PaginationMeta } from './pagination-meta';
@@ -22,39 +22,39 @@ import type { PaginationMeta } from './pagination-meta';
 
 
 /**
- * StandardResponseListFaucetTokenItem
+ * StandardResponseListPactTemplateRead
  * @export
- * @interface StandardResponseListFaucetTokenItem
+ * @interface StandardResponseListPactTemplateRead
  */
-export interface StandardResponseListFaucetTokenItem {
+export interface StandardResponseListPactTemplateRead {
     /**
      * 
      * @type {boolean}
-     * @memberof StandardResponseListFaucetTokenItem
+     * @memberof StandardResponseListPactTemplateRead
      */
     'success'?: boolean;
     /**
      * 
-     * @type {Array<FaucetTokenItem>}
-     * @memberof StandardResponseListFaucetTokenItem
+     * @type {Array<PactTemplateRead>}
+     * @memberof StandardResponseListPactTemplateRead
      */
-    'result': Array<FaucetTokenItem>;
+    'result': Array<PactTemplateRead>;
     /**
      * 
      * @type {string}
-     * @memberof StandardResponseListFaucetTokenItem
+     * @memberof StandardResponseListPactTemplateRead
      */
     'suggestion'?: string;
     /**
      * 
      * @type {string}
-     * @memberof StandardResponseListFaucetTokenItem
+     * @memberof StandardResponseListPactTemplateRead
      */
     'message'?: string;
     /**
      * 
      * @type {PaginationMeta}
-     * @memberof StandardResponseListFaucetTokenItem
+     * @memberof StandardResponseListPactTemplateRead
      */
     'meta'?: PaginationMeta;
 }

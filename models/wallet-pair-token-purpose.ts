@@ -14,14 +14,14 @@
 
 
 /**
- * Supported wallet types.
+ * Which flow this claim row represents (pair claim vs post-completion restore).
  * @export
  * @enum {string}
  */
-export const WalletType = {
-    Custodial: 'Custodial' as const,
-    MPC: 'MPC' as const,
+export const WalletPairTokenPurpose = {
+    pair: 'pair' as const,
+    restore: 'restore' as const,
 } as const;
 
-export type WalletType = typeof WalletType[keyof typeof WalletType];
+export type WalletPairTokenPurpose = typeof WalletPairTokenPurpose[keyof typeof WalletPairTokenPurpose];
 
