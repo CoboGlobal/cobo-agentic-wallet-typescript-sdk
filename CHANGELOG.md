@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.7
+
+OpenAPI spec upgraded from 1.2.4 to 1.3.0.
+
+### New models
+
+- **`PactRemaining`** — remaining quota for an active pact: `tx_count_remaining`, `usd_remaining`, `time_remaining_seconds`. Fields are null when the corresponding completion condition is not set.
+- **`RecentTxSummary`** — compact transaction record (id, request_id, status, operation_type, created_at) used for recent-activity enrichment on pacts.
+
+### New features
+
+- **`PactPublicRead.recent_txs`** — up to 5 most recent transactions submitted under the pact, newest first.
+- **`PactSummary.remaining`** — remaining quota for active pacts; null for non-active pacts or when no measurable completion conditions are set.
+- **`UserTransactionRead.fee`** — fee information reported by the downstream provider, including configured parameters (e.g. `max_fee_per_gas`, `gas_limit`) and execution results (e.g. `fee_used`, `gas_used`).
+- **`UserTransactionRead.cobo_transaction_id`** — downstream provider's transaction ID, populated once the transaction is submitted and acknowledged.
+- **`UserTransactionData.cobo_transaction_id`** — same field exposed on the data sub-object.
+- **`SearchRecipesRequest.wallet_id`** — when provided, active pacts referencing each matched recipe are embedded as `matching_pacts` in the search results.
+
 ## 0.1.6
 
 OpenAPI spec upgraded from 1.1.0 to 1.2.4.

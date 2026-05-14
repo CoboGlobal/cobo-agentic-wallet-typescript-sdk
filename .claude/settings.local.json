@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk diff 8dadafa 745553d -- api/wallets-api.ts)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk diff 8dadafa 745553d -- api/transactions-api.ts)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk diff 8dadafa 745553d -- models/suggestion-key.ts)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk show 745553d:models/pact-template-read.ts)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk status)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk diff --stat HEAD)",
+      "Bash(git -C /Users/zzhao/workspace/cobo-agentic-wallet-typescript-sdk diff HEAD -- package.json)",
+      "Bash(git *)"
+    ]
+  }
+}
